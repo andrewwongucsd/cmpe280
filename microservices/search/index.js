@@ -9,6 +9,8 @@ var return_status_msg = "Success";
 
 module.exports = router(
   get('/:from/:to/:date', async (req, res, next) => {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+
       var from = req.params.from.trim().toUpperCase();
       var to = req.params.to.trim().toUpperCase();
       var date = req.params.date.trim();

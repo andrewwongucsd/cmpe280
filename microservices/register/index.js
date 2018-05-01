@@ -24,6 +24,8 @@ module.exports = router(
       const MyCollection = dbo.collection(table_name);
       const result = await MyCollection.insertOne({_id: username, username: username, password: password});
       db.close();
+      console.log({response_status: "Success"});
+      res.setHeader('Access-Control-Allow-Origin', '*');
       send(res, 200, {response_status: "Success"});
   }), get('/:username', async (req, res, next) => {
       const username = req.params.username.trim();
@@ -33,6 +35,7 @@ module.exports = router(
       const result = await MyCollection.find({_id: username}).toArray();
       console.log(result);
       db.close();
+      res.setHeader('Access-Control-Allow-Origin', '*');
       send(res, 200, {response_status: "Success", data: result});
     }
   ), get('/', async (req, res, next) => {
@@ -42,6 +45,7 @@ module.exports = router(
       const result = await MyCollection.find({}).toArray();
       console.log(result);
       db.close();
+      res.setHeader('Access-Control-Allow-Origin', '*');
       send(res, 200, {response_status: "Success", data: result});
     }
   ), del('/:username/:date', async (req, res, next) => {
@@ -58,6 +62,7 @@ module.exports = router(
       console.log(result);
       await MyCollection.updateOne({_id: username}, {$set: result} , { upsert: true});
       db.close();
+      res.setHeader('Access-Control-Allow-Origin', '*');
       send(res, 200, {response_status: "Success", data: result});
     }
   ), del('/:username', async (req, res, next) => {
@@ -72,6 +77,7 @@ module.exports = router(
       console.log(result);
       await MyCollection.updateOne({_id: username}, {$set: result} , { upsert: true});
       db.close();
+      res.setHeader('Access-Control-Allow-Origin', '*');
       send(res, 200, {response_status: "Success", data: result});
     }
   )
