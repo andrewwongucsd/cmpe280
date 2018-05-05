@@ -11,6 +11,41 @@
 
     <title>Air California</title>
 
+    <style>
+      .modal-dialog {
+        position:absolute;
+        top:50% !important;
+        transform: translate(0, -50%) !important;
+        -ms-transform: translate(0, -50%) !important;
+        -webkit-transform: translate(0, -50%) !important;
+        margin:auto 5%;
+        width:90%;
+        height:80%;
+      }
+      .modal-content {
+        min-height:100%;
+        position:absolute;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
+      }
+      .modal-body {
+        position:absolute;
+        top:45px; /** height of header **/
+        bottom:45px;  /** height of footer **/
+        left:0;
+        right:0;
+        overflow-y:auto;
+      }
+      .modal-footer {
+        position:absolute;
+        bottom:0;
+        left:0;
+        right:0;
+      }
+    </style>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 
@@ -63,18 +98,6 @@
                 <li><a id="flight_search_button" href="#flight_search">Flight</a></li>
                 <li><a href="#hotel_search">Hotel</a></li>
                 <li><a href="#car_search">Car</a></li>
-                <!-- <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li> -->
               </ul>
             </div>
           </div>
@@ -169,76 +192,14 @@
                 <div class="col-sm-2">
                   <input class="form-control" id="depart_date" name="depart_date" placeholder="MM/DD/YYY" type="date"/>
                 </div>
-                <!-- <label class="col-sm-1 col-form-label" for="return_date">Return Date</label> -->
-                <!-- <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label> -->
-                <!-- <div class="col-sm-2"> -->
-                  <!-- <input class="form-control" id="return_date" name="return_date" placeholder="MM/DD/YYY" type="text"/> -->
-                <!-- </div> -->
               </div>
               <button type="submit" class="btn btn-primary">Search</button>
               <button type="reset" class="btn btn-primary">Reset</button>
             </form>
           </div>
-          <!-- <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Special Offers: Burbank</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p> -->
-        </div><!-- /.col-lg-4 -->
-        <!-- <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>--><!-- /.col-lg-4 -->
-        <!-- <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>-->
-        <!-- /.col-lg-4 -->
+
+        </div>
       </div><!-- /.row -->
-
-
-      <!-- START THE FEATURETTES -->
-
-      <!-- <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7 col-md-push-5">
-          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5 col-md-pull-7">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
-      </div>
-
-      <hr class="featurette-divider"> -->
 
       <!-- /END THE FEATURETTES -->
 
@@ -249,6 +210,7 @@
       <table class="table" id="flight_search_result_table">
         <thead>
           <tr>
+            <th scope="col">Flight#</th>
             <th scope="col">From</th>
             <th scope="col">To</th>
             <th scope="col">Date</th>
@@ -257,24 +219,6 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr> -->
         </tbody>
       </table>
 
@@ -313,6 +257,7 @@
     <div class="container" id="enroll_thank_you_register_div">
         <hr class="featurette-divider">
         <h1> Thank you for registering as a flyer member at Air California! </h1>
+        <h2 class="text-center font-italic" id="thank_you_next_destination"> </h2>
     </div>
     <div class="container" id="login_div">
       <hr class="featurette-divider">
@@ -333,6 +278,28 @@
           <button type="reset" class="btn btn-primary">Reset</button>
       </form>
     </div>
+
+    <!-- Purchase or Login or Enroll Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal_title"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="modal_body">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" value="" id="modal_button"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- FOOTER -->
     <div class="container">
       <footer>
@@ -341,19 +308,13 @@
       </footer>
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"><\/script>')</script>
     <script src="https://getbootstrap.com/docs/3.3/dist/js/bootstrap.min.js"></script>
-    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="https://getbootstrap.com/docs/3.3/assets/js/vendor/holder.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <!-- <script src="https://raw.githubusercontent.com/Haixing-Hu/bootstrap3-ie10-viewport-bug-workaround/master/ie10-viewport-bug-workaround.js"></script> -->
-    <!-- Bootstrap Date-Picker Plugin -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript">
     var user_profile = null;
+    var next_destination = null;
     (function(){
       $("#notification_bar").hide();
       $("#logout_button").hide();
@@ -383,6 +344,13 @@
       $("#flight_search_result_div").hide();
     }
 
+    function thank_you_div_display(){
+      $("#flight_search_div").hide();
+      $("#enroll_div").hide();
+      $("#login_div").hide();
+      $("#enroll_thank_you_register_div").show();
+    }
+
     function flight_search_result_display(){
       $("#notification_bar").hide();
       $("#flight_search_div").hide();
@@ -400,10 +368,11 @@
       $("#notification_bar").removeClass("alert-danger");
       $("#notification_bar").addClass("alert-success");
       $("#notification_bar_text").text("You have logged in as "+user_profile.username);
-      console.log($("#logout_button"));
 
+      login_nav_button_change();
+    }
+    function login_nav_button_change(){
       $("#logout_button").show();
-      console.log($("#logout_button"));
       $("#login_button").hide();
       $("#enroll_button").hide();
     }
@@ -419,7 +388,8 @@
       $("#enroll_button").show();
     }
 
-    $("#flight_search_form").submit(function(){
+    $("#flight_search_form").submit(function(e){
+      e.preventDefault();
       var depart_airport = $('#depart_airport').val().trim();
       var arrival_airport = $('#arrival_airport').val().trim();
       var depart_date = $('#depart_date').val().trim();
@@ -427,38 +397,27 @@
         alert("Search content is empty..");
         return;
       }
-      console.log(depart_date);
       $.ajax({
-          type        : 'GET', // define the type of HTTP verb we want to use (POST for our form)
-          url         : 'http://localhost:5000/'+depart_airport+'/'+arrival_airport+'/'+depart_date, // the url where we want to POST
-          dataType    : 'json', // what type of data do we expect back from the server
-          encode      : true
-      }).done(function(data) {
-        if(data.response_status == 'Success'){
-          console.log(data);
-          flight_search_result_display();
-          var dataTable = $('#flight_search_result_table').dataTable();
-          dataTable.fnClearTable();
-          dataTable.fnAddData([
-            'FROM',
-            'TO',
-            'DATE',
-            'TIME',
-            'BOOK'
-          ]);
-
-          $.each(data.data, function( index, value ) {
-            // <tr>
-            //   <td>Mark</td>
-            //   <td>Otto</td>
-            //   <td>@mdo</td>
-            // </tr>
-            console.log(value);
-            $("#flight_search_result_table tbody").append("<tr><td scope='row'>"+value.from+"</td><td>"+value.to+"</td><td>"+value.date+"</td><td>"+value.time+"</td><td> USD$100</td>");
-          });
+          type : 'GET',
+          url : 'http://localhost:5000/'+depart_airport+'/'+arrival_airport+'/'+depart_date+'',
+          success : function(data){
+            if(data.response_status == 'Success'){
+              flight_search_result_display();
+              $.each(data.data, function( index, value ) {
+                var append_string = "";
+                if(user_profile != null && value.hasOwnProperty('passenger_id') && value.passenger_id[user_profile._id]){
+                  append_string = "<tr><td scope='row'>"+value._id+"</td><td>"+value.from+"</td><td>"+value.to+"</td><td>"+value.date+"</td><td>"+value.time+"</td><td><button type='button' class='btn btn-primary disabled'> BOUGHT </button></td>";
+                }else{
+                  append_string = "<tr><td scope='row'>"+value._id+"</td><td>"+value.from+"</td><td>"+value.to+"</td><td>"+value.date+"</td><td>"+value.time+"</td><td><button onclick='purchase_check_login(\""+value._id+"\",\""+value.date+"\")' type='button' class='btn btn-primary' data-toggle='modal' data-target='#modal'> USD$100</button></td>";
+                }
+                $("#flight_search_result_table tbody").append(append_string);
+              });
+          }
         }
-      });
+      })
     });
+
+
     $("#login_form").submit(function(){
       var prompted_password = $('#login_customer_password').val().trim();
       var prompted_username = $('#login_customer_username').val().trim();
@@ -466,20 +425,21 @@
           type        : 'GET', // define the type of HTTP verb we want to use (POST for our form)
           url         : 'http://localhost:4000/'+prompted_username, // the url where we want to POST
           dataType    : 'json', // what type of data do we expect back from the server
-          encode      : true
-      }).done(function(data) {
-        if(data.response_status == 'Success' && data.data.length > 0 && data.data[0].password.localeCompare(prompted_username)){
-          user_profile = data.data[0];
-          flight_search_div_display();
-          successful_login_display();
-        }else{
-          $('#notification_bar').fadeIn("fast", function(){
-            $("#notification_bar").fadeOut(4000);
-          });
-          $("#notification_bar").removeClass("alert-success");
-          $("#notification_bar").addClass("alert-danger");
-          $("#notification_bar_text").text("The combination of username and password is incorrect.!");
-        }
+          encode      : true,
+          success : function(data) {
+            if(data.response_status == 'Success' && data.data.length > 0 && data.data[0].password.localeCompare(prompted_username)){
+              user_profile = data.data[0];
+              flight_search_div_display();
+              successful_login_display();
+            }else{
+              $('#notification_bar').fadeIn("fast", function(){
+                $("#notification_bar").fadeOut(4000);
+              });
+              $("#notification_bar").removeClass("alert-success");
+              $("#notification_bar").addClass("alert-danger");
+              $("#notification_bar_text").text("The combination of username and password is incorrect.!");
+            }
+          }
       });
     });
     $("#enroll_form").submit(function(){
@@ -495,17 +455,123 @@
             url         : 'http://localhost:4000/'+formData.username+'/'+formData.password, // the url where we want to POST
             data        : formData, // our data object
             dataType    : 'json', // what type of data do we expect back from the server
-            encode          : true
-        }).done(function(data) {
-          if(data.response_status == 'Success'){
-            $("#flight_search_div").hide();
-            $("#enroll_div").hide();
-            $("#enroll_thank_you_register_div").show();
-            $("#login_div").hide();
-          }
-        });
+            encode      : true,
+            success     :  function(data) {
+              if(data.response_status == 'Success'){
+                thank_you_div_display();
+                user_profile = data;
+                console.log(user_profile);
+                //redirect to next destination
+                if(next_destination != null){
+                  if(next_destination == "flight_search_result_div"){
+                    next_destination = null;
+                    $("#thank_you_next_destination").text("You are now redirected to finishing booking!");
+                    setTimeout(function () {
+                      flight_search_result_display();
+                      $("#thank_you_next_destination").text("");
+                    }, 5000);
+                  }
+                }
+
+              }
+            }
+        })
     });
 
+    function purchase_check_login(flight_id, date){
+      if(user_profile == null){
+        login_modal(flight_id, date);
+      }else{
+        purchase_modal(flight_id, date);
+      }
+    }
+    function login_modal(flight_id, date){
+      var login_modal_body = '<div class="container col-sm-8">';
+      login_modal_body += '<div class="form-group row"><label for="example-text-input" class="col-2 col-form-label">Customer Username</label><div class="col-10"><input class="form-control" type="text" value="Artisanal kale" id="login_modal_customer_username"></div></div>';
+      login_modal_body += '<div class="form-group row"><label for="example-password-input" class="col-2 col-form-label">Password</label><div class="col-10"><input class="form-control" type="password" value="hunter2" id="login_modal_customer_password"></div></div>';
+      login_modal_body += '<div class="form-group row"><a onclick="login_modal_enroll()" href=\"#\"> Have not registered? Please enroll to our wonderful membership program!</a></div></div>';
+      login_modal_body += '<input type="hidden" name="login_flight_id" id="login_flight_id" value="'+flight_id+'">';
+      login_modal_body += '<input type="hidden" name="login_date" id="login_date" value="'+date+'">';
+      $("#modal_button").text('Login');
+      $("#modal_body").html(login_modal_body);
+      $("#modal_title").text('Login to continue booking');
+    }
+    function purchase_modal(flight_id, date){
+      var purchase_modal_body = '<img src="https://www.bankofamerica.com/content/images/ContextualSiteGraphics/CreditCardArt/en_US/Approved_PCM/8blm_trvsigcm_v_250x158.png"/>'
+      purchase_modal_body += '<div class="container col-sm-8"><div class="form-group row"><label for="example-text-input" class="col-2 col-form-label">Customer Username on card</label><input class="form-control" type="text" value="Artisanal kale" id="purchase_modal_credit_card_name"></div>';
+      purchase_modal_body += '<div class="form-group row"><label for="purchase_modal_credit_card_number" class="col-2 col-form-label">Credit Card Number</label><input class="form-control" type="text" value="hunter2" id="purchase_modal_credit_card_number"></div>';
+      purchase_modal_body += '<div class="form-group row"><label for="purchase_modal_credit_card_number" class="col-2 col-form-label">Zip Code</label><input class="form-control" type="text" value="hunter2" id="purchase_modal_credit_card_zip_code"></div>';
+      purchase_modal_body += '<div class="form-group row"><label for="purchase_modal_credit_card_security_code" class="col-2 col-form-label">Credit Card Security Code</label><input class="form-control" type="text" value="hunter2" id="purchase_modal_credit_card_security_code"></div></div>';
+      purchase_modal_body += '<input type="hidden" name="purchase_flight_id" id="purchase_flight_id" value="'+flight_id+'">';
+      purchase_modal_body += '<input type="hidden" name="purchase_date" id="purchase_date" value="'+date+'">';
+
+      $("#modal_button").text('Purchase');
+      $("#modal_body").html(purchase_modal_body);
+      $("#modal_title").text('Book to have a wonderful journey');
+    }
+
+
+    $("#modal_button").click(function(){
+      if(user_profile == null){
+        // do login
+        var prompted_password = $('#login_modal_customer_password').val().trim();
+        var prompted_username = $('#login_modal_customer_username').val().trim();
+        $.ajax({
+            type        : 'GET', // define the type of HTTP verb we want to use (POST for our form)
+            url         : 'http://localhost:4000/'+prompted_username, // the url where we want to POST
+            success     : function(data) {
+              if(data.response_status == 'Success' && data.data.length > 0 && data.data[0].password.localeCompare(prompted_username)){
+                user_profile = data.data[0];
+                //continue to purchase.
+                purchase_modal($('#login_flight_id').val(), $('#login_date').val());
+                login_nav_button_change();
+              }else{
+                $('#notification_bar').fadeIn("fast", function(){
+                  $("#notification_bar").fadeOut(4000);
+                });
+                $("#notification_bar").removeClass("alert-success");
+                $("#notification_bar").addClass("alert-danger");
+                $("#notification_bar_text").text("The combination of username and password is incorrect.!");
+              }
+            }
+        });
+      }else{
+        //   post('/:username/:flight_id/:departure_date', async (req, res, next) => {c
+        $.ajax({
+            type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+            url         : 'http://localhost:3000/'+user_profile._id+'/'+$("#purchase_flight_id").val()+'/'+$("#purchase_date").val(), // the url where we want to POST
+            success     : function(data) {
+              console.log(data);
+              if(data.response_status == 'Success' && data.data.length > 0 && data.data[0].password.localeCompare(prompted_username)){
+                user_profile = data.data[0];
+                //continue to purchase.
+                purchase_modal($('#login_flight_id').val(), $('#login_date').val());
+                login_nav_button_change();
+              }else{
+                $('#notification_bar').fadeIn("fast", function(){
+                  $("#notification_bar").fadeOut(4000);
+                });
+                $("#notification_bar").removeClass("alert-success");
+                $("#notification_bar").addClass("alert-danger");
+                $("#notification_bar_text").text("The combination of username and password is incorrect.!");
+              }
+            },error: function(data){
+              console.log(data);
+            }
+        });
+
+      }
+    });
+
+    function login_modal_enroll(){
+      console.log("login_modal_enroll");
+      close_modal();
+      enroll_display();
+      next_destination = "flight_search_result_div";
+    }
+    function close_modal(){
+      $("#modal").modal('toggle');
+    }
     $("#logout_button").click(function() {
       successful_logout_display();
       user_profile = null;

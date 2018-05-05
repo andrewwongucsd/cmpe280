@@ -9,6 +9,7 @@ var return_status_msg = "Success";
 
 module.exports = router(
   post('/:username/:password', async (req, res, next) => {
+      res.setHeader('Access-Control-Allow-Origin', '*');
       var username = req.params.username;
       var password = req.params.password;
       username = username.trim().toUpperCase();
@@ -22,12 +23,19 @@ module.exports = router(
       const db = await mongoClient.connect(mongodb_url);
       const dbo = db.db(database_name);
       const MyCollection = dbo.collection(table_name);
-      const result = await MyCollection.insertOne({_id: username, username: username, password: password});
+      var result;
+      const insert_json = {_id: username, username: username, password: password};
+      try {
+        result = await MyCollection.insertOne();
+      }catch(err) {
+        send(res, 400, {response_status: "Bad", reason: "duplicated user"});
+        return;
+      }
       db.close();
-      console.log({response_status: "Success"});
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      send(res, 200, {response_status: "Success"});
+      var return_json = {response_status: "Success", data: insert_json};
+      send(res, 200, return_json);
   }), get('/:username', async (req, res, next) => {
+      res.setHeader('Access-Control-Allow-Origin', '*');
       const username = req.params.username.trim();
       const db = await mongoClient.connect(mongodb_url);
       const dbo = db.db(database_name);
@@ -35,7 +43,6 @@ module.exports = router(
       const result = await MyCollection.find({_id: username}).toArray();
       console.log(result);
       db.close();
-      res.setHeader('Access-Control-Allow-Origin', '*');
       send(res, 200, {response_status: "Success", data: result});
     }
   ), get('/', async (req, res, next) => {
@@ -45,7 +52,6 @@ module.exports = router(
       const result = await MyCollection.find({}).toArray();
       console.log(result);
       db.close();
-      res.setHeader('Access-Control-Allow-Origin', '*');
       send(res, 200, {response_status: "Success", data: result});
     }
   ), del('/:username/:date', async (req, res, next) => {

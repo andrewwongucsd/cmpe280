@@ -28,6 +28,8 @@ module.exports = router(
       const result = await MyCollection.find(query).toArray();
       console.log(query);
       db.close();
+      console.log(result);
+
       send(res, 200, {response_status: "Success", data: result});
   }),get('/', async (req, res, next) => {
       const db = await mongoClient.connect(mongodb_url);
