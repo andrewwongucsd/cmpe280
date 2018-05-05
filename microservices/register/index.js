@@ -26,7 +26,7 @@ module.exports = router(
       var result;
       const insert_json = {_id: username, username: username, password: password};
       try {
-        result = await MyCollection.insertOne();
+        result = await MyCollection.insertOne(insert_json);
       }catch(err) {
         send(res, 400, {response_status: "Bad", reason: "duplicated user"});
         return;
