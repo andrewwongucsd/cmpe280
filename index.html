@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <meta name="description" content="The true Californian Airline flys">
+    <meta name="author" content="CMPE280 - Flight Booking">
+    <meta name="keywords" content="Californian, Airline, travel, booking, dream">
 
     <title>Air California</title>
 
@@ -94,6 +94,7 @@
                 <li class="active"><a id="home_button" href="#">Home</a></li>
                 <li><a id="login_button" href="#login">Log In</a></li>
                 <li><a id="enroll_button" href="#enroll">Enroll</a></li>
+                <li><a id="user_profile_button" href="#user_profile"><span id="user_profile_button_text">USERNAME HERE</span></a></li>
                 <li><a id="logout_button" href="#logout">Log Out</a></li>
                 <li><a id="flight_search_button" href="#flight_search">Flight</a></li>
                 <li><a href="#hotel_search">Hotel</a></li>
@@ -205,6 +206,7 @@
 
       </div><!-- /.container -->
     </div>
+
     <div class="container" id="flight_search_result_div">
       <hr class="featurette-divider">
       <table class="table" id="flight_search_result_table">
@@ -279,6 +281,41 @@
       </form>
     </div>
 
+    <div class="container" id="confirmation_ticket_div">
+      <hr class="featurette-divider">
+      <h1 class="text-center"> Thank you for flying with us! </h1>
+      <h2>Comfirmation: <span id="flight_comfirmation"></span> </h2>
+      <h2>Passenger Name: <span id="flight_comfirmation_name"></span> </h2>
+      <h2>Flight: <span id="flight_comfirmation_id"></span> </h2>
+      <h2>Departure Airport: <span id="flight_comfirmation_from"></span> </h2>
+      <h2>Arrival Airport: <span id="flight_comfirmation_to"></span> </h2>
+      <h2>Date: <span id="flight_comfirmation_on"></span> </h2>
+      <h2>Time: <span id="flight_comfirmation_at"></span> </h2>
+
+
+    </div>
+
+    <div class="container" id="user_profile_div">
+      <hr class="featurette-divider">
+      <h1 class="text-center"> Thank you for flying with us! </h1>
+      <h2>Passenger Name: <span id="userprofile_name"></span> </h2>
+      <table class="table" id="user_profile_div_table">
+        <thead>
+          <tr>
+            <th scope="col">Flight#</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Confirmation</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+
+    </div>
+
     <!-- Purchase or Login or Enroll Modal -->
     <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -318,14 +355,18 @@
     (function(){
       $("#notification_bar").hide();
       $("#logout_button").hide();
+      $("#user_profile_button").hide();
       flight_search_div_display();
     })();
+
     function enroll_display(){
       $("#flight_search_div").hide();
       $("#enroll_div").show();
       $("#enroll_thank_you_register_div").hide();
       $("#login_div").hide();
       $("#flight_search_result_div").hide();
+      $("#confirmation_ticket_div").hide();
+      $("#user_profile_div").hide();
 
     }
     function login_display(){
@@ -334,7 +375,18 @@
       $("#enroll_thank_you_register_div").hide();
       $("#login_div").show();
       $("#flight_search_result_div").hide();
+      $("#confirmation_ticket_div").hide();
+      $("#user_profile_div").hide();
+    }
 
+    function confirmation_ticket_div_display(){
+      $("#flight_search_div").hide();
+      $("#enroll_div").hide();
+      $("#enroll_thank_you_register_div").hide();
+      $("#login_div").hide();
+      $("#flight_search_result_div").hide();
+      $("#confirmation_ticket_div").show();
+      $("#user_profile_div").hide();
     }
     function flight_search_div_display(){
       $("#flight_search_div").show();
@@ -342,6 +394,8 @@
       $("#enroll_thank_you_register_div").hide();
       $("#login_div").hide();
       $("#flight_search_result_div").hide();
+      $("#confirmation_ticket_div").hide();
+      $("#user_profile_div").hide();
     }
 
     function thank_you_div_display(){
@@ -349,6 +403,9 @@
       $("#enroll_div").hide();
       $("#login_div").hide();
       $("#enroll_thank_you_register_div").show();
+      $("#confirmation_ticket_div").hide();
+      $("#user_profile_div").hide();
+      $("#user_profile_button_text").text(decodeURI(user_profile._id));
     }
 
     function flight_search_result_display(){
@@ -358,21 +415,71 @@
       $("#enroll_thank_you_register_div").hide();
       $("#login_div").hide();
       $("#flight_search_result_div").show();
+      $("#confirmation_ticket_div").hide();
+      $("#user_profile_div").hide();
+    }
+
+    function user_profile_display(){
+      $("#notification_bar").hide();
+      $("#flight_search_div").hide();
+      $("#enroll_div").hide();
+      $("#enroll_thank_you_register_div").hide();
+      $("#login_div").hide();
+      $("#flight_search_result_div").hide();
+      $("#confirmation_ticket_div").hide();
+      $("#user_profile_div").show();
+    }
+
+    function user_profile_ajax(){
+      //TODO
+      if(user_profile){
+        $.ajax({
+            type        : 'GET',
+            url         : 'http://localhost:4000/'+user_profile._id,
+            success     :  function(data) {
+              if(data.response_status == 'Success'){
+                user_profile_display();
+                var payload = data.data[0];
+                $("#userprofile_name").text(decodeURI(payload._id));
+                // console.log(payload);
+                $("#user_profile_div_table tbody").html("");
+                $.each(payload.activities, function( index, value ) {
+                  $.each(value, function(k, v){
+                    console.log(v);
+                    var append_string = "";
+                    append_string = "<tr><td scope='row'>"+v.flight_id+"</td><td>"+v.from+"</td><td>"+v.to+"</td><td>"+v.date+"</td><td>"+v.time+"</td><td>"+v.confirmation+"</td>";
+                    $("#user_profile_div_table tbody").append(append_string);
+                  })
+                });
+
+              }
+            }
+        })
+      }else{
+        console.log("ERROR!!!! user_profile_ajax()");
+      }
     }
     function successful_login_display(){
       // console.log($("#logout_button"));
-
+      if(user_profile){
+        $("#user_profile_button_text").text(decodeURI(user_profile._id));
+      }else{
+        console.log("ERROR!!! successful_login_display()");
+      }
       $('#notification_bar').fadeIn("fast", function(){
         $("#notification_bar").fadeOut(4000);
       });
       $("#notification_bar").removeClass("alert-danger");
       $("#notification_bar").addClass("alert-success");
-      $("#notification_bar_text").text("You have logged in as "+user_profile.username);
+      $("#notification_bar_text").text("You have logged in as "+decodeURI(user_profile.username));
 
       login_nav_button_change();
     }
     function login_nav_button_change(){
       $("#logout_button").show();
+      $("#user_profile_button").show();
+
+      //
       $("#login_button").hide();
       $("#enroll_button").hide();
     }
@@ -384,6 +491,7 @@
       $("#notification_bar").addClass("alert-success");
       $("#notification_bar_text").text("You have logged out successfully!");
       $("#logout_button").hide();
+      $("#user_profile_button").hide();
       $("#login_button").show();
       $("#enroll_button").show();
     }
@@ -403,6 +511,7 @@
           success : function(data){
             if(data.response_status == 'Success'){
               flight_search_result_display();
+              $("#flight_search_result_table tbody").html("");
               $.each(data.data, function( index, value ) {
                 var append_string = "";
                 if(user_profile != null && value.hasOwnProperty('passenger_id') && value.passenger_id[user_profile._id]){
@@ -422,9 +531,9 @@
       var prompted_password = $('#login_customer_password').val().trim();
       var prompted_username = $('#login_customer_username').val().trim();
       $.ajax({
-          type        : 'GET', // define the type of HTTP verb we want to use (POST for our form)
-          url         : 'http://localhost:4000/'+prompted_username, // the url where we want to POST
-          dataType    : 'json', // what type of data do we expect back from the server
+          type        : 'GET',
+          url         : 'http://localhost:4000/'+prompted_username,
+          dataType    : 'json',
           encode      : true,
           success : function(data) {
             if(data.response_status == 'Success' && data.data.length > 0 && data.data[0].password.localeCompare(prompted_username)){
@@ -451,17 +560,13 @@
       };
       // process the form
         $.ajax({
-            type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-            url         : 'http://localhost:4000/'+formData.username+'/'+formData.password, // the url where we want to POST
-            data        : formData, // our data object
-            dataType    : 'json', // what type of data do we expect back from the server
-            encode      : true,
+            type        : 'POST',
+            url         : 'http://localhost:4000/'+formData.username+'/'+formData.password,
             success     :  function(data) {
               if(data.response_status == 'Success'){
+                user_profile = data.data;
                 thank_you_div_display();
-                user_profile = data;
-                console.log(user_profile);
-                //redirect to next destination
+                login_nav_button_change();
                 if(next_destination != null){
                   if(next_destination == "flight_search_result_div"){
                     next_destination = null;
@@ -517,8 +622,8 @@
         var prompted_password = $('#login_modal_customer_password').val().trim();
         var prompted_username = $('#login_modal_customer_username').val().trim();
         $.ajax({
-            type        : 'GET', // define the type of HTTP verb we want to use (POST for our form)
-            url         : 'http://localhost:4000/'+prompted_username, // the url where we want to POST
+            type        : 'GET',
+            url         : 'http://localhost:4000/'+prompted_username,
             success     : function(data) {
               if(data.response_status == 'Success' && data.data.length > 0 && data.data[0].password.localeCompare(prompted_username)){
                 user_profile = data.data[0];
@@ -537,25 +642,29 @@
         });
       }else{
         //   post('/:username/:flight_id/:departure_date', async (req, res, next) => {c
+        console.log(user_profile);
+
         $.ajax({
-            type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-            url         : 'http://localhost:3000/'+user_profile._id+'/'+$("#purchase_flight_id").val()+'/'+$("#purchase_date").val(), // the url where we want to POST
+            type        : 'POST',
+            url         : 'http://localhost:3000/'+user_profile._id+'/'+$("#purchase_flight_id").val()+'/'+$("#purchase_date").val(),
             success     : function(data) {
               console.log(data);
-              if(data.response_status == 'Success' && data.data.length > 0 && data.data[0].password.localeCompare(prompted_username)){
-                user_profile = data.data[0];
-                //continue to purchase.
-                purchase_modal($('#login_flight_id').val(), $('#login_date').val());
-                login_nav_button_change();
+              if(data.response_status == 'Success' && data.hasOwnProperty('customers_data') && data.hasOwnProperty('flights_data')){
+                close_modal();
+                confirmation_ticket_div_display();
+                $("#flight_comfirmation").text(data.flights_data.passenger_id[data.customers_data._id]);
+                $("#flight_comfirmation_name").text(decodeURI(data.customers_data._id));
+                $("#flight_comfirmation_id").text(data.flights_data._id);
+                $("#flight_comfirmation_from").text(data.flights_data.from);
+                $("#flight_comfirmation_to").text(data.flights_data.to);
+                $("#flight_comfirmation_on").text(data.flights_data.date);
+                $("#flight_comfirmation_at").text(data.flights_data.time);
+
               }else{
-                $('#notification_bar').fadeIn("fast", function(){
-                  $("#notification_bar").fadeOut(4000);
-                });
-                $("#notification_bar").removeClass("alert-success");
-                $("#notification_bar").addClass("alert-danger");
-                $("#notification_bar_text").text("The combination of username and password is incorrect.!");
+                console.log('error in returning from :3000');
               }
-            },error: function(data){
+            }, error    : function(data){
+              console.log("err");
               console.log(data);
             }
         });
@@ -564,7 +673,6 @@
     });
 
     function login_modal_enroll(){
-      console.log("login_modal_enroll");
       close_modal();
       enroll_display();
       next_destination = "flight_search_result_div";
@@ -575,6 +683,14 @@
     $("#logout_button").click(function() {
       successful_logout_display();
       user_profile = null;
+    });
+    $("#user_profile_button").click(function() {
+      if(user_profile){
+        user_profile_ajax();
+      }else{
+        console.log("ERROR! trigger from user_profile_button");
+      }
+
     });
     $("#enroll_button").click(function() {
       enroll_display();

@@ -10,6 +10,15 @@ const customers_table = "customers1";
 var return_status_code = 200;
 var return_status_msg = "Success";
 
+function makeid() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  for (var i = 0; i < 7; i++){
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+}
+
 
 module.exports = router(
   post('/:username/:flight_id/:departure_date', async (req, res, next) => {
@@ -32,27 +41,24 @@ module.exports = router(
       const flights_query = {_id: flight_id, date: departure_date};
       const flights_result = await flights_collection.findOne(flights_query);
       // delete flights_result._id;
-      console.log("===========================================");
-
-      console.log(flights_result);
 
       const customers_collection = dbo.collection(customers_table);
       const customers_query = {_id: username};
       const customers_result = await customers_collection.findOne(customers_query);
-      console.log("===========================================");
 
-      console.log(customers_result);
 
       if(flights_result.length == 0 || customers_result.length == 0){
         send(res, 400, {response_status: "Bad"});
         return;
       }
+
+      if(!flights_result.hasOwnProperty('passenger_id')){
+        flights_result.passenger_id = {};
+      }
       if(flights_result.passenger_id[username]){
         send(res, 400, {response_status: "Bad", reason: "The username has already purchased a ticket."});
         return;
       }
-      console.log("===========================================");
-      console.log(flights_result);
 
       if(!flights_result.hasOwnProperty('capacity')){
         flights_result.capacity = 150;
@@ -62,32 +68,40 @@ module.exports = router(
       if(!flights_result.hasOwnProperty('passenger_id')){
         flights_result.passenger_id = {};
       }
-      flights_result.passenger_id[username] = username;
-      console.log("===========================================");
+      flights_result.passenger_id[username] = makeid();
 
-      console.log(flights_result);
 
       await flights_collection.updateOne({_id: flight_id}, {$set: flights_result} , { upsert: true});
-      console.log("flights_table should be updated.");
 
       if(!customers_result.hasOwnProperty('activities')){
         customers_result.activities = {};
       }
       if(!customers_result.activities.hasOwnProperty(departure_date)){
+        // customers_result.activities[departure_date] = [];
         customers_result.activities[departure_date] = [];
       }
-      customers_result.activities[departure_date].push(flight_id);
-      console.log("===========================================");
-
+      // customers_result.activities[departure_date].push(flight_id);
+      customers_result.activities[departure_date].push({
+        flight_id: flights_result._id,
+        from: flights_result.from,
+        to: flights_result.to,
+        date: flights_result.date,
+        time: flights_result.time,
+        confirmation: flights_result.passenger_id[username]
+      })
       console.log(customers_result);
 
       await customers_collection.updateOne({_id: username}, {$set: customers_result}, { upsert: true});
-      console.log("customers_table should be updated.");
 
       db.close();
 
-      send(res, 200, {response_status: "Success", flights_data: flights_result, customers_data: customers_result });
-  }),get('/', async (req, res, next) => {
+      send(res, 200, {response_status: "Success", flights_data: flights_result, customers_data: customers_result});
+  }),get('/random', async (req, res, next) => {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+
+      send(res, 200, {response_status: "Success", confirmation: makeid()});
+    }
+  ), get('/', async (req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
       const db = await mongoClient.connect(mongodb_url);
       const dbo = db.db(database_name);

@@ -3,7 +3,9 @@ const { router, post, get, del } = require('microrouter');
 const mongoClient = require('mongodb').MongoClient;
 const mongodb_url = "mongodb://localhost:27017/"
 const database_name = "caliair";
-const table_name = "customers1";
+const customers_table_name = "customers1";
+const flights_table_name = "flights";
+
 var return_status_code = 200;
 var return_status_msg = "Success";
 
@@ -22,7 +24,7 @@ module.exports = router(
       }
       const db = await mongoClient.connect(mongodb_url);
       const dbo = db.db(database_name);
-      const MyCollection = dbo.collection(table_name);
+      const MyCollection = dbo.collection(customers_table_name);
       var result;
       const insert_json = {_id: username, username: username, password: password};
       try {
@@ -39,16 +41,15 @@ module.exports = router(
       const username = req.params.username.trim();
       const db = await mongoClient.connect(mongodb_url);
       const dbo = db.db(database_name);
-      const MyCollection = dbo.collection(table_name);
+      const MyCollection = dbo.collection(customers_table_name);
       const result = await MyCollection.find({_id: username}).toArray();
-      console.log(result);
       db.close();
       send(res, 200, {response_status: "Success", data: result});
     }
   ), get('/', async (req, res, next) => {
       const db = await mongoClient.connect(mongodb_url);
       const dbo = db.db(database_name);
-      const MyCollection = dbo.collection(table_name);
+      const MyCollection = dbo.collection(customers_table_name);
       const result = await MyCollection.find({}).toArray();
       console.log(result);
       db.close();
@@ -60,7 +61,7 @@ module.exports = router(
       console.log(username);
       const db = await mongoClient.connect(mongodb_url);
       const dbo = db.db(database_name);
-      const MyCollection = dbo.collection(table_name);
+      const MyCollection = dbo.collection(customers_table_name);
       const result = await MyCollection.findOne({_id: username});
       console.log(result);
       delete result.activities[date];
@@ -75,7 +76,7 @@ module.exports = router(
       var username = req.params.username.trim().toUpperCase();
       const db = await mongoClient.connect(mongodb_url);
       const dbo = db.db(database_name);
-      const MyCollection = dbo.collection(table_name);
+      const MyCollection = dbo.collection(customers_table_name);
       const result = await MyCollection.findOne({_id: username});
       console.log(result);
       delete result.activities;
@@ -86,5 +87,17 @@ module.exports = router(
       res.setHeader('Access-Control-Allow-Origin', '*');
       send(res, 200, {response_status: "Success", data: result});
     }
-  )
+  ), del('/', async (req, res, next) => {
+    console.log("before drop!");
+    const db = await mongoClient.connect(mongodb_url);
+    const dbo = db.db(database_name);
+    dbo.dropCollection(customers_table_name, function(err, delOK) {
+      if (err) throw err;
+      if (delOK) console.log("Collection deleted");
+      db.close();
+    });
+    console.log("after drop!");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    send(res, 200, {response_status: "Success", result: ""});
+  })
 );
