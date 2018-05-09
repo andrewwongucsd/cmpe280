@@ -1,0 +1,10 @@
+{
+  "name": "auto-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "SELENIUM_BROWSER=firefox node testing.js "
+  },
+  "author": "Andrew Wong"
+}

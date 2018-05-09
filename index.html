@@ -91,14 +91,15 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a id="home_button" href="#">Home</a></li>
-                <li><a id="login_button" href="#login">Log In</a></li>
-                <li><a id="enroll_button" href="#enroll">Enroll</a></li>
+                <li class="active"><a id="home_button" href="#"><span id="home_button_title">HOME</span></a></li>
+                <li><a id="login_button" href="#login"><span id="login_button_title">Log In</span></a></li>
+                <li><a id="enroll_button" href="#enroll"><span id="enroll_button_title">Enroll</span></a></li>
                 <li><a id="user_profile_button" href="#user_profile"><span id="user_profile_button_text">USERNAME HERE</span></a></li>
-                <li><a id="logout_button" href="#logout">Log Out</a></li>
-                <li><a id="flight_search_button" href="#flight_search">Flight</a></li>
-                <li><a href="#hotel_search">Hotel</a></li>
-                <li><a href="#car_search">Car</a></li>
+                <li><a id="logout_button" href="#logout"><span id="logout_button_title">Log Out</span></a></li>
+                <li><a id="flight_search_button" href="#flight_search"><span id="flight_search_button_title">Flight</span></a></li>
+                <li><a href="#hotel_search"><span id="hotel_search_button_title">Hotel<span></a></li>
+                <li><a href="#car_search"><span id="car_search_button_title">Car</span></a></li>
+                <li><a id="language_switch_button" href="#cantonese"><span id="language_switch_title">粵</span></a></li>
               </ul>
             </div>
           </div>
@@ -175,27 +176,27 @@
               <div class="form-group row">
 
 
-                <label class="col-sm-1 col-form-label" for="depart_airport">Depart Airport</label>
+                <label class="col-sm-1 col-form-label" for="depart_airport"><span id="depart_airport_title">Departure Airport</span></label>
                 <!-- <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label> -->
                 <div class="col-sm-2">
-                  <input type="text" class="form-control" id="depart_airport" placeholder="Return Airport">
+                  <input type="text" class="form-control" id="depart_airport" placeholder="Depart Airport">
                   <!-- <input class="form-control" id="date" name="depart_airport" placeholder="MM/DD/YYY" type="text"/> -->
                 </div>
-                <label class="col-sm-1 col-form-label" for="arrival_airport">Arrival Airport</label>
+                <label class="col-sm-1 col-form-label" for="arrival_airport"><span id="arrival_airport_title">Arrival Airport</span></label>
                 <!-- <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label> -->
                 <div class="col-sm-2">
                   <input type="text" class="form-control" id="arrival_airport" placeholder="Arrival Airport">
                   <!-- <input class="form-control" id="date" name="depart_airport" placeholder="MM/DD/YYY" type="text"/> -->
                 </div>
 
-                <label class="col-sm-1 col-form-label" for="depart_date">Depart Date</label>
+                <label class="col-sm-1 col-form-label" for="depart_date"><span id="departure_date_title">Departure Date</span></label>
                 <!-- <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label> -->
                 <div class="col-sm-2">
                   <input class="form-control" id="depart_date" name="depart_date" placeholder="MM/DD/YYY" type="date"/>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary">Search</button>
-              <button type="reset" class="btn btn-primary">Reset</button>
+              <button id="flight_search_form_button" type="submit" class="btn btn-primary"><span id="flight_search_form_button_title">Search</span></button>
+              <button type="reset" class="btn btn-primary"><span id="flight_search_form_button_reset_title">Reset</span></button>
             </form>
           </div>
 
@@ -706,6 +707,43 @@
     $("#logo_button").click(function() {
       flight_search_div_display();
     });
+    var language_status = "english";
+    $("#language_switch_button").click(function(){
+      if(language_status == "english"){
+        language_status = "cantonese";
+        $("#language_switch_title").text("English");
+        $("#home_button_title").text("主頁");
+        $("#login_button_title").text("睇您");
+        $("#enroll_button_title").text("飛員");
+        $("#logout_button_title").text("拜拜");
+        $("#flight_search_button_title").text("飛查");
+        $("#hotel_search_button_title").text("住查");
+        $("#car_search_button_title").text("車查");
+        $("#depart_airport_title").text("起飛點");
+        $("#arrival_airport_title").text("降落點");
+        $("#departure_date_title").text("降落日");
+        $("#flight_search_form_button_title").text("查");
+        $("#flight_search_form_button_reset_title").text("拆");
+      }else{
+        language_status = "english";
+        $("#language_switch_title").text("粵");
+        $("#home_button_title").text("Home");
+        $("#login_button_title").text("Login");
+        $("#enroll_button_title").text("Enroll");
+        $("#logout_button_title").text("Logout");
+        $("#flight_search_button_title").text("Flights");
+        $("#hotel_search_button_title").text("Hotels");
+        $("#car_search_button_title").text("Cars");
+        $("#depart_airport_title").text("Departure Airport");
+        $("#arrival_airport_title").text("Arrival Airport");
+        $("#departure_date_title").text("Departure Date");
+        $("#flight_search_form_button_title").text("Search");
+        $("#flight_search_form_button_reset_title").text("Reset");
+
+
+      }
+    });
+
 
     </script>
   </body>
