@@ -432,7 +432,6 @@
     }
 
     function user_profile_ajax(){
-      //TODO
       if(user_profile){
         $.ajax({
             type        : 'GET',
@@ -452,7 +451,6 @@
                     $("#user_profile_div_table tbody").append(append_string);
                   })
                 });
-
               }
             }
         })
@@ -480,7 +478,7 @@
       $("#logout_button").show();
       $("#user_profile_button").show();
 
-      //
+
       $("#login_button").hide();
       $("#enroll_button").hide();
     }
@@ -578,9 +576,13 @@
                     }, 5000);
                   }
                 }
-
+              }else{
+                console.log("bad in enrollment");
               }
-            }
+            },
+          error: function(data){
+            alert(data.responseJSON.reason);
+          }
         })
     });
 
@@ -667,6 +669,7 @@
             }, error    : function(data){
               console.log("err");
               console.log(data);
+              alert(data.responseJSON.reason);
             }
         });
 
@@ -739,7 +742,6 @@
         $("#departure_date_title").text("Departure Date");
         $("#flight_search_form_button_title").text("Search");
         $("#flight_search_form_button_reset_title").text("Reset");
-
 
       }
     });
